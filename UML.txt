@@ -1,0 +1,68 @@
+# UML AI13
+
+```plantuml
+@startuml
+class Utilisateur{
+  {field} int id
+  {field} int type
+  {field} String email
+  {field} String name
+  {field} String corporation
+  {field} String phone
+  {field} String password
+}
+
+class Parcours{
+  {field} int id
+  {field} int score
+  {field} int duree
+}
+
+class Questionnaire{
+  {field} int id
+  {field} bool active
+}
+
+class Question{
+  {field} int id
+  {field} int order
+  {field} bool active
+}
+
+class Reponse{
+  {field} int id
+  {field} int order
+  {field} bool active
+}
+
+class Competence{
+  {field} int id
+  {field} String sujet
+}
+
+class Version {
+  {field} int id
+  {field} int numero
+  {field} bool active
+}
+
+Parcours "*" -- "1" Utilisateur: réalise
+
+Parcours "*" -- "1" Questionnaire: engendre
+
+Questionnaire "*" -- "1" Competence: évalue
+
+Version "1" --* "*" Question: compose
+
+Question "1" *-- "*" Reponse: compose
+
+Question "1"  *-- "1" Reponse: bonne réponse
+
+Parcours "*" -- "*" Reponse
+
+Questionnaire "1"  -- "*" Version: possède
+
+Utilisateur "1"  -- "*" Questionnaire : crée
+
+@enduml
+```

@@ -1,6 +1,7 @@
 CREATE TABLE `Utilisateur` (
   `id` int,
   `type` int,
+  `active` bool,
   `email` string,
   `name` string,
   `societe` string,
@@ -39,7 +40,7 @@ CREATE TABLE `Reponse` (
 CREATE TABLE `Parcours` (
   `id` int,
   `utilisateur_id` int,
-  `questionnaire_id` int,
+  `version_id` int,
   `score` int,
   `duree` int
 );

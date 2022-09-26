@@ -69,7 +69,7 @@ ALTER TABLE `Reponse` ADD FOREIGN KEY (`question_id`) REFERENCES `Question` (`id
 
 ALTER TABLE `Parcours` ADD FOREIGN KEY (`utilisateur_id`) REFERENCES `Utilisateur` (`id`);
 
-ALTER TABLE `Parcours` ADD FOREIGN KEY (`questionnaire_id`) REFERENCES `Questionnaire` (`id`);
+ALTER TABLE `Parcours` ADD FOREIGN KEY (`version_id`) REFERENCES `Version` (`id`);
 
 ALTER TABLE `parcours_reponses` ADD FOREIGN KEY (`parcours_id`) REFERENCES `Parcours` (`id`);
 

@@ -34,7 +34,7 @@ public class Answer {
         this.order = order;
     }
 
-    public int getText() {
+    public String getText() {
         return text;
     }
 

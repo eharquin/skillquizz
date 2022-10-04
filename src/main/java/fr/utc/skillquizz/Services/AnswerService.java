@@ -16,10 +16,12 @@ public class AnswerService {
     private final AnswerRepository answerRepository;
 
     public AnswerService(AnswerRepository answerRepository) {
+
         this.answerRepository = answerRepository;
     }
 
     public Answer getAnswer(Long channelId){
+
         return this.answerRepository.findById(channelId).orElseThrow();
     }
 
@@ -36,8 +38,8 @@ public class AnswerService {
     public Answer updateAnswer(Answer answer, Long answerId){
         System.out.println("Answer name : " + answerId);
         Answer answerToUpdate = getAnswer(answerId);
-        answerToUpdate.setOrder() = answer.getOrder();
-        answerToUpdate.setText() = answer.getText();
+        answerToUpdate.setOrder(answer.getOrder());
+        answerToUpdate.setText(answer.getText());
         return this.answerRepository.save(answerToUpdate);
     }
 

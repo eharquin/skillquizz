@@ -16,7 +16,7 @@ public class QuizzService {
 
     public Quizz getQuizz(long quizzId){
 
-        return (Quizz) this.quizzRepository.findById(quizzId);
+        return this.quizzRepository.findById(quizzId).orElse(null);
     }
 
     public void deleteQuizz(Long quizzId){

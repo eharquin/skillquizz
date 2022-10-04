@@ -1,8 +1,6 @@
-package fr.utc.skillquizz.Services;
+package fr.utc.skillquizz.services;
 
-import fr.utc.skillquizz.models.Answer;
 import fr.utc.skillquizz.models.Quizz;
-import fr.utc.skillquizz.repositories.AnswerRepository;
 import fr.utc.skillquizz.repositories.QuizzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,8 +1,7 @@
 package fr.utc.skillquizz.controllers;
 
-import fr.utc.skillquizz.Services.QuizzService;
+import fr.utc.skillquizz.services.QuizzService;
 import fr.utc.skillquizz.models.Quizz;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

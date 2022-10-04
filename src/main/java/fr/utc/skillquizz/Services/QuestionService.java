@@ -36,10 +36,10 @@ public class QuestionService {
     public Question updateQuestion(Question question, Long questionId){
         System.out.println("Question name : " + questionId);
         Question questionToUpdate = getQuestion(questionId);
-        questionToUpdate.setOrder() = question.getOrder();
-        questionToUpdate.setText() = question.getText();
-        questionToUpdate.setActive() = question.getActive();
-        questionToUpdate.setVersion() = question.getVersion();
+        questionToUpdate.setOrder(question.getOrder());
+        questionToUpdate.setText(question.getText());
+        questionToUpdate.setActive(question.getActive());
+        questionToUpdate.setVersion(question.getVersion());
         return this.questionRepository.save(questionToUpdate);
     }
 

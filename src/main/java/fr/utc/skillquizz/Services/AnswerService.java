@@ -1,4 +1,4 @@
-package fr.utc.skillquizz.Services;
+package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.Answer;
 import fr.utc.skillquizz.repositories.AnswerRepository;
@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 @Transactional
-public class AnswerServices {
+public class AnswerService {
 
     @Autowired
     private final AnswerRepository answerRepository;
 
-    public AnswerServices(AnswerRepository answerRepository) {
+    public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
     }
 

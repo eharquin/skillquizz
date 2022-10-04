@@ -20,12 +20,12 @@ public class QuestionController {
     }
 
     @PostMapping("/question")
-    public void store(@PathVariable int quizzId){
+    public void store(@RequestBody Question question){
 
     }
 
     @PatchMapping("/question/{id}")
-    public void update(@PathVariable int questionId){
+    public void update(@PathVariable int questionId, @RequestBody Question question){
 
     }
 

@@ -9,6 +9,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int order;
+    private String text;
     private boolean active;
     @OneToOne
     private Version version;
@@ -30,6 +31,14 @@ public class Question {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public int getText() {
+        return text;
+    }
+
+    public void setText(int text) {
+        this.text = text;
     }
 
     public boolean isActive() {

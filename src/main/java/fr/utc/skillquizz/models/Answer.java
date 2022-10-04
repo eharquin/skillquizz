@@ -30,16 +30,16 @@ public class Answer {
         return order;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public int getText() {
         return text;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Question getQuestion() {

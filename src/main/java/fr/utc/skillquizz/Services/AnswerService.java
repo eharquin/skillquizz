@@ -33,4 +33,13 @@ public class AnswerService {
         return this.answerRepository.save(answer);
     }
 
+    public Answer updateAnswer(Answer answer, Long answerId){
+        System.out.println("Answer name : " + answerId);
+        Answer answerToUpdate = getAnswer(answerId);
+        answerToUpdate.setOrder() = answer.getOrder();
+        answerToUpdate.setText() = answer.getText();
+        return this.answerRepository.save(answerToUpdate);
+    }
+
+
 }

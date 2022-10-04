@@ -33,11 +33,11 @@ public class Question {
         this.order = order;
     }
 
-    public int getText() {
+    public String getText() {
         return text;
     }
 
-    public void setText(int text) {
+    public void setText(String text) {
         this.text = text;
     }
 

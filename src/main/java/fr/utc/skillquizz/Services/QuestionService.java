@@ -34,7 +34,7 @@ public class QuestionService {
     }
 
     public Question updateQuestion(Question question, Long questionId){
-        System.out.println("Question name : " + question.getId());
+        System.out.println("Question name : " + questionId);
         Question questionToUpdate = getQuestion(questionId);
         questionToUpdate.setOrder() = question.getOrder();
         questionToUpdate.setText() = question.getText();

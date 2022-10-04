@@ -11,6 +11,7 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int order;
+    private String text;
     @ManyToOne
     private Question question;
     @ManyToMany(mappedBy = "answers")
@@ -27,6 +28,14 @@ public class Answer {
 
     public int getOrder() {
         return order;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public int getText() {
+        return text;
     }
 
     public void setOrder(int order) {

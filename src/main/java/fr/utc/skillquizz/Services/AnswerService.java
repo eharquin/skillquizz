@@ -20,7 +20,7 @@ public class AnswerService {
     }
 
     public Answer getAnswer(Long channelId){
-        return (Answer) this.answerRepository.findById(channelId);
+        return this.answerRepository.findById(channelId).orElseThrow();
     }
 
     public void deleteAnswer(Long answerId){

@@ -38,7 +38,7 @@ public class QuestionService {
         Question questionToUpdate = getQuestion(questionId);
         questionToUpdate.setOrder(question.getOrder());
         questionToUpdate.setText(question.getText());
-        questionToUpdate.setActive(question.getActive());
+        questionToUpdate.setActive(question.isActive());
         questionToUpdate.setVersion(question.getVersion());
         return this.questionRepository.save(questionToUpdate);
     }

@@ -10,4 +10,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     Optional<Question> deleteAnswerById(Long id);
 
+    void deleteQuestionById(Long questionId);
 }

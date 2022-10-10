@@ -1,20 +1,17 @@
-package fr.utc.skillquizz.models;
+package fr.utc.skillquizz.dto;
+
+
+import fr.utc.skillquizz.models.Answer;
+import fr.utc.skillquizz.models.Version;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="questions")
-public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class QuestionDto {
     private int id;
     private int order;
     private String text;
     private boolean active;
-    @OneToOne
-    private Version version;
-    @OneToOne
-    @JoinColumn(name = "right_answer", referencedColumnName = "id")
+    private fr.utc.skillquizz.models.Version version;
     private Answer goodAnswer;
 
     public int getId() {
@@ -49,7 +46,7 @@ public class Question {
         this.active = active;
     }
 
-    public Version getVersion() {
+    public fr.utc.skillquizz.models.Version getVersion() {
         return version;
     }
 
@@ -66,3 +63,4 @@ public class Question {
     }
 
 }
+

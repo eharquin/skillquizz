@@ -38,14 +38,14 @@ public class CourseController {
         courseService.createCourse(course);
     }
 
-    @PatchMapping("/course/{id}")
+    @PatchMapping("/course/{courseToModifyId}")
     public void update(@PathVariable long courseToModifyId, @RequestBody CourseDto courseDto){
         Course course = convertToEntity(courseDto);
         courseService.updateCourse(course, courseToModifyId);
     }
 
-    @PostMapping("/course/{id}/answer/{id}")
-    public void update(@PathVariable long courseToModifyId, @PathVariable long answerToAdd){
+    @PostMapping("/course/{courseToModifyId}/answer/{answerToAdd}")
+    public void addAnswerToCourse(@PathVariable long courseToModifyId, @PathVariable long answerToAdd){
         courseService.addAnswerToCourse(courseToModifyId, answerToAdd);
     }
 

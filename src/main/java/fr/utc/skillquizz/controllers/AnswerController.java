@@ -1,41 +1,92 @@
 package fr.utc.skillquizz.controllers;
 
 
+import fr.utc.skillquizz.dto.UserDto;
 import fr.utc.skillquizz.models.Answer;
+import fr.utc.skillquizz.models.AnswerDto;
 import fr.utc.skillquizz.services.AnswerService;
+import org.apache.tomcat.util.json.ParseException;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AnswerController {
-
+    @Autowired
     private AnswerService answerService;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    @GetMapping("/answer")
-    public void index(){
-
+    @GetMapping(path = "/answer", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<AnswerDto> index(){
+        List<Answer> answerList = answerService.getAnswers();
+        List<AnswerDto> answerDtoList = mapList(answerList, AnswerDto.class);
+        return answerDtoList;
     }
 
-    @GetMapping("/answer/{id}")
-    public void show(@PathVariable int answerId){
+    @GetMapping(path = "quizz/{quizzId}/question/{questionId}/answer", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<AnswerDto> getAnswersByQuestionId(@PathVariable long quizzId, @PathVariable long questionId){
+        List<Answer> answerList = answerService.getAnswersByQuestionId(questionId);
+        List<AnswerDto> answerDtoList = mapList(answerList, AnswerDto.class);
+        return answerDtoList;
+    }
 
+    @GetMapping(path = "parcours/{parcoursId}/answer", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<AnswerDto> getAnswersByIdParcours(@PathVariable long parcoursId){
+        List<Answer> answerList = answerService.getAnswersByParcoursId(parcoursId);
+        List<AnswerDto> answerDtoList = mapList(answerList, AnswerDto.class);
+        return answerDtoList;
+    }
+
+    @GetMapping(path = "/answer/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+    public AnswerDto show(@PathVariable long id){
+        Answer answer =  answerService.getAnswer(id);
+        AnswerDto answerDto = convertToDto(answer);
+        return answerDto;
     }
 
     @PostMapping("/answer")
-    public void store(@RequestBody Answer answer){
+    public void store(@RequestBody AnswerDto answerDto){
+        Answer answer = convertToEntity(answerDto);
         answerService.createAnswer(answer);
-        /*if (recordCreated)
-            return new ResponseEntity(HttpStatus.CREATED);
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-         */
     }
 
     @PatchMapping("/answer/{id}")
-    public void update(@PathVariable long answerToModifyId, @RequestBody Answer answer){
+    public void update(@PathVariable long answerToModifyId, @RequestBody AnswerDto answerDto){
+        Answer answer = convertToEntity(answerDto);
         answerService.updateAnswer(answer, answerToModifyId);
     }
 
-    @DeleteMapping("/answer/{id}")
+    @DeleteMapping("/answer/{answerId}")
     public void destroy(@PathVariable long answerId){
         answerService.deleteAnswer(answerId);
+    }
+
+    private AnswerDto convertToDto(Answer answer) {
+        AnswerDto answerDto = modelMapper.map(answer, AnswerDto.class);
+        return answerDto;
+    }
+
+    private Answer convertToEntity(AnswerDto answerDto)  {
+        Answer answer = modelMapper.map(answerDto, Answer.class);
+
+        if (answerDto != null) {
+            Answer answerOld =  answerService.getAnswer((long) answerDto.getId());
+            answer.setId(answerOld.getId());
+        }
+        return answer;
+    }
+
+    <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
+        return source
+                .stream()
+                .map(element -> modelMapper.map(element, targetClass))
+                .collect(Collectors.toList());
     }
 }

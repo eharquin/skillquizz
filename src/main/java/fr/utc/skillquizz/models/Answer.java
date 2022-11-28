@@ -12,6 +12,8 @@ public class Answer {
     private int id;
     private int order;
     private String text;
+
+    private long questionId;
     @ManyToOne
     private Question question;
     @ManyToMany(mappedBy = "answers")

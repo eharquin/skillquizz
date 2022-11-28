@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 public class QuizzDto implements Serializable {
     private int id;
-    private User user;
-    private Skill skill;
+    private long userId;
+    private long skillId;
     private boolean active;
 
 
@@ -20,27 +20,27 @@ public class QuizzDto implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
-
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getSkillId() {
+        return skillId;
+    }
+
+    public void setSkillId(long skillId) {
+        this.skillId = skillId;
     }
 }

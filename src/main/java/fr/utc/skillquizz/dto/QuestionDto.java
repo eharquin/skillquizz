@@ -1,10 +1,5 @@
 package fr.utc.skillquizz.dto;
 
-
-import fr.utc.skillquizz.models.Answer;
-import fr.utc.skillquizz.models.Version;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
 public class QuestionDto implements Serializable {
@@ -12,8 +7,9 @@ public class QuestionDto implements Serializable {
     private int order;
     private String text;
     private boolean active;
-    private fr.utc.skillquizz.models.Version version;
-    private Answer goodAnswer;
+    private long versionId;
+
+    private long goodAnswerId;
 
     public int getId() {
         return id;
@@ -47,21 +43,20 @@ public class QuestionDto implements Serializable {
         this.active = active;
     }
 
-    public fr.utc.skillquizz.models.Version getVersion() {
-        return version;
+    public long getVersionId() {
+        return versionId;
     }
 
-    public void setVersion(Version version) {
-        this.version = version;
+    public void setVersionId(long versionId) {
+        this.versionId = versionId;
     }
 
-    public Answer getGoodAnswer() {
-        return goodAnswer;
+    public long getGoodAnswerId() {
+        return goodAnswerId;
     }
 
-    public void setGoodAnswer(Answer goodAnswer) {
-        this.goodAnswer = goodAnswer;
+    public void setGoodAnswerId(long goodAnswerId) {
+        this.goodAnswerId = goodAnswerId;
     }
-
 }
 

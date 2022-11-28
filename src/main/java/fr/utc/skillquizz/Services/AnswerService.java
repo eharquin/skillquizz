@@ -1,9 +1,7 @@
 package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.Answer;
-import fr.utc.skillquizz.models.AnswerDto;
 import fr.utc.skillquizz.repositories.AnswerRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

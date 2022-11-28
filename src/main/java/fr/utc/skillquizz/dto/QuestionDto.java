@@ -5,8 +5,9 @@ import fr.utc.skillquizz.models.Answer;
 import fr.utc.skillquizz.models.Version;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-public class QuestionDto {
+public class QuestionDto implements Serializable {
     private int id;
     private int order;
     private String text;

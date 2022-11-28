@@ -1,9 +1,9 @@
 package fr.utc.skillquizz.controllers;
 
 
+import fr.utc.skillquizz.dto.AnswerDto;
 import fr.utc.skillquizz.dto.UserDto;
 import fr.utc.skillquizz.models.Answer;
-import fr.utc.skillquizz.models.AnswerDto;
 import fr.utc.skillquizz.services.AnswerService;
 import org.apache.tomcat.util.json.ParseException;
 import org.modelmapper.ModelMapper;

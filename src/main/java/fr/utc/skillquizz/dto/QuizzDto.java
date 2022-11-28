@@ -3,7 +3,9 @@ package fr.utc.skillquizz.dto;
 import fr.utc.skillquizz.models.Skill;
 import fr.utc.skillquizz.models.User;
 
-public class QuizzDto {
+import java.io.Serializable;
+
+public class QuizzDto implements Serializable {
     private int id;
     private User user;
     private Skill skill;

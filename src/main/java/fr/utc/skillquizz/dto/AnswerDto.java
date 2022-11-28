@@ -1,15 +1,16 @@
-package fr.utc.skillquizz.models;
+package fr.utc.skillquizz.dto;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AnswerDto {
+public class AnswerDto implements Serializable {
     private int id;
     private int order;
     private String text;
 
-    private Question question;
+    private long questionId;
 
     public int getId() {
         return id;
@@ -35,11 +36,11 @@ public class AnswerDto {
         this.text = text;
     }
 
-    public Question getQuestion() {
-        return question;
+    public long getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 }

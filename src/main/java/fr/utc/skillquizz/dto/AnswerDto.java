@@ -11,9 +11,6 @@ public class AnswerDto {
 
     private Question question;
 
-    Set<Course> courses = new HashSet<>();
-
-
     public int getId() {
         return id;
     }

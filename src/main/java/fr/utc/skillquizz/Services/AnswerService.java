@@ -1,12 +1,16 @@
 package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.Answer;
+import fr.utc.skillquizz.models.AnswerDto;
 import fr.utc.skillquizz.repositories.AnswerRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,6 +27,7 @@ public class AnswerService {
     public Answer getAnswer(Long channelId){
 
         return this.answerRepository.findById(channelId).orElseThrow();
+
     }
 
     public void deleteAnswer(Long answerId){
@@ -44,4 +49,15 @@ public class AnswerService {
     }
 
 
+    public List<Answer> getAnswers() {
+        return this.answerRepository.findAll();
+    }
+
+    public List<Answer> getAnswersByQuestionId(long questionId) {
+        return answerRepository.findAllByQuestionId(questionId);
+    }
+
+    public List<Answer> getAnswersByParcoursId(long parcoursId) {
+        return answerRepository.findAllByParcoursId(parcoursId);
+    }
 }

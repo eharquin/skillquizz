@@ -11,17 +11,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class QuizzController {
+public class QuizzController extends BaseController{
 
     private QuizzService quizzService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+
 
     @GetMapping("/quizz")
     public List<QuizzDto> index(){
-        List<QuizzDto> quizzes = quizzService.getQuizzesList(); // arguments à compléter + fonction à ajouter au service
-        return quizzes;
+        List<Quizz> quizzes = quizzService.getQuizzesList();
+        List<QuizzDto> quizzesDto = super.mapList(quizzes, QuizzDto.class);
+        return quizzesDto;
     }
 
     @GetMapping("/quizz/{id}")
@@ -53,20 +53,13 @@ public class QuizzController {
     }
 
     private QuizzDto convertToDto(Quizz quizz) {
-        QuizzDto quizzDto = modelMapper.map(quizz, QuizzDto.class);
+        QuizzDto quizzDto = super.getModelMapper().map(quizz, QuizzDto.class);
         return quizzDto;
     }
 
     private Quizz convertToEntity(QuizzDto quizzDto) {
-        Quizz quizz = modelMapper.map(quizzDto, Quizz.class);
+        Quizz quizz = super.getModelMapper().map(quizzDto, Quizz.class);
         return quizz;
-    }
-
-    <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
-        return source
-                .stream()
-                .map(element -> modelMapper.map(element, targetClass))
-                .collect(Collectors.toList());
     }
 
 }

@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CourseController {
+public class CourseController extends BaseController{
     @Autowired
     private CourseService courseService;
-    @Autowired
-    private ModelMapper modelMapper;
 
     @GetMapping(path = "/course", produces= MediaType.APPLICATION_JSON_VALUE)
     public List<CourseDto> index(){
@@ -55,20 +53,12 @@ public class CourseController {
     }
 
     private CourseDto convertToDto(Course course) {
-        CourseDto courseDto = modelMapper.map(course, CourseDto.class);
+        CourseDto courseDto = getModelMapper().map(course, CourseDto.class);
         return courseDto;
     }
 
     private Course convertToEntity(CourseDto courseDto)  {
-        Course course = modelMapper.map(courseDto, Course.class);
-
+        Course course = getModelMapper().map(courseDto, Course.class);
         return course;
-    }
-
-    <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
-        return source
-                .stream()
-                .map(element -> modelMapper.map(element, targetClass))
-                .collect(Collectors.toList());
     }
 }

@@ -17,11 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class AnswerController {
+public class AnswerController extends BaseController{
     @Autowired
     private AnswerService answerService;
-    @Autowired
-    private ModelMapper modelMapper;
 
     @GetMapping(path = "/answer", produces= MediaType.APPLICATION_JSON_VALUE)
     public List<AnswerDto> index(){
@@ -69,12 +67,12 @@ public class AnswerController {
     }
 
     private AnswerDto convertToDto(Answer answer) {
-        AnswerDto answerDto = modelMapper.map(answer, AnswerDto.class);
+        AnswerDto answerDto = getModelMapper().map(answer, AnswerDto.class);
         return answerDto;
     }
 
     private Answer convertToEntity(AnswerDto answerDto)  {
-        Answer answer = modelMapper.map(answerDto, Answer.class);
+        Answer answer = getModelMapper().map(answerDto, Answer.class);
 
         if (answerDto != null) {
             Answer answerOld =  answerService.getAnswer((long) answerDto.getId());
@@ -83,10 +81,4 @@ public class AnswerController {
         return answer;
     }
 
-    <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
-        return source
-                .stream()
-                .map(element -> modelMapper.map(element, targetClass))
-                .collect(Collectors.toList());
-    }
 }

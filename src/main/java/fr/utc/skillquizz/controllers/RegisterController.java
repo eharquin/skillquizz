@@ -11,13 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class RegisterController {
+public class RegisterController extends BaseController{
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     @PostMapping(path = "/register", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDto){
@@ -29,6 +26,6 @@ public class RegisterController {
         user.setPassword(userDto.getPassword());
         userRepository.save(user);
 
-        return new ResponseEntity<>(modelMapper.map(user, UserDto.class), HttpStatus.OK);
+        return new ResponseEntity<>(getModelMapper().map(user, UserDto.class), HttpStatus.OK);
     }
 }

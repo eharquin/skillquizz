@@ -1,8 +1,11 @@
 package fr.utc.skillquizz.services;
 
+import fr.utc.skillquizz.dto.QuizzDto;
 import fr.utc.skillquizz.models.Quizz;
 import fr.utc.skillquizz.repositories.QuizzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class QuizzService {
 
@@ -37,5 +40,9 @@ public class QuizzService {
         quizzToUpdate.setUser(quizz.getUser());
 
         return this.quizzRepository.save(quizzToUpdate);
+    }
+
+    public List<Quizz> getQuizzesList() {
+        return this.quizzRepository.findAll();
     }
 }

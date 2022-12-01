@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class QuestionService {
@@ -43,4 +45,11 @@ public class QuestionService {
         return this.questionRepository.save(questionToUpdate);
     }
 
+    public List<Question> getList() {
+       return  questionRepository.findAll();
+    }
+
+    public Question getById(long questionId) {
+       return  questionRepository.findById(questionId).orElseThrow();
+    }
 }

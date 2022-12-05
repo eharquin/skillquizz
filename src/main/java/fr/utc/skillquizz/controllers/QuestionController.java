@@ -26,7 +26,7 @@ public class QuestionController extends BaseController{
         return mapList(questions, QuestionDto.class);
     }
 
-    @GetMapping("/question/{id}")
+    @GetMapping("/question/{questionId}")
     public QuestionDto show(@PathVariable long questionId) {
         Question question = questionService.getById(questionId);
         return convertToDto(question);
@@ -37,12 +37,12 @@ public class QuestionController extends BaseController{
         questionService.createQuestion(question);
     }
 
-    @PatchMapping("/admin/question/{id}")
+    @PatchMapping("/admin/question/{questionId}")
     public void update(@PathVariable long questionId, @RequestBody Question question) {
         questionService.updateQuestion(question, questionId);
     }
 
-    @DeleteMapping("/admin/question/{id}")
+    @DeleteMapping("/admin/question/{questionId}")
     public void destroy(@PathVariable long questionId) {
         questionService.deleteQuestion(questionId);
     }

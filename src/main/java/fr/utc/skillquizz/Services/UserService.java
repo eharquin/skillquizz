@@ -1,13 +1,17 @@
 package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.User;
-import fr.utc.skillquizz.repositories.AnswerRepository;
-import fr.utc.skillquizz.repositories.CourseRepository;
+
+import javax.transaction.Transactional;
+
 import fr.utc.skillquizz.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@Transactional
 public class UserService {
     @Autowired
     private UserRepository userRepository;

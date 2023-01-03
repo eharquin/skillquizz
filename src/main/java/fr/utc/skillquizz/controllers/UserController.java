@@ -20,7 +20,6 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin
     @GetMapping(path = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDto> index() {
         List<User> users = userService.getUsers();
@@ -28,32 +27,27 @@ public class UserController extends BaseController {
         return usersDto;
     }
 
-
-    @CrossOrigin
     @GetMapping(path = "/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserDto show(@PathVariable Long id) {
         User user = userService.getUser(id);
         return convertToDto(user);
     }
 
-    @CrossOrigin
     @PostMapping("/user")
     public void store(@RequestBody UserDto userDto) {
         User user = convertToEntity(userDto);
         userService.create(user);
     }
 
-    @CrossOrigin
     @PatchMapping("/user/{id}")
-    public void update(@PathVariable long courseToModifyId, @RequestBody UserDto userDto) {
+    public void update(@PathVariable long id, @RequestBody UserDto userDto) {
         User user = convertToEntity(userDto);
-        userService.update(courseToModifyId, user);
+        userService.update(id, user);
     }
 
-    @CrossOrigin
-    @DeleteMapping("/user/{userId}")
-    public void destroy(@PathVariable long userId) {
-        userService.delete(userId);
+    @DeleteMapping("/user/{id}")
+    public void destroy(@PathVariable long id) {
+        userService.delete(id);
     }
 
     private UserDto convertToDto(User user) {

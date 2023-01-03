@@ -8,12 +8,8 @@ import java.util.stream.Collectors;
 
 public abstract class BaseController {
 
-    //@Autowired // voir annotation ou pas
+    @Autowired // voir annotation ou pas
     private ModelMapper modelMapper;
-
-    public BaseController() {
-        this.modelMapper = new ModelMapper();
-    }
 
     <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
         return source

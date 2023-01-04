@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface QuizzRepository extends JpaRepository<Quizz, Long> {
 
-    Optional<Answer> deleteQuizzById(Long id);
 }

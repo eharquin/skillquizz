@@ -1,43 +1,32 @@
 package fr.utc.skillquizz.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name="quizzes")
 public class Quizz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @ManyToOne
-    private User user;
-    @ManyToOne
-    private Skill skill;
+    private Long id;
+    private String skill;
     private boolean active;
+    @OneToMany(mappedBy = "quizz")
+    private List<Question> questions;
 
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Skill getSkill() {
+    public String getSkill() {
         return skill;
     }
 
-    public void setSkill(Skill skill) {
+    public void setSkill(String skill) {
         this.skill = skill;
     }
 
@@ -47,5 +36,9 @@ public class Quizz {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
     }
 }

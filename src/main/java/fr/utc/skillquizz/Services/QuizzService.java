@@ -4,9 +4,11 @@ import fr.utc.skillquizz.dto.QuizzDto;
 import fr.utc.skillquizz.models.Quizz;
 import fr.utc.skillquizz.repositories.QuizzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QuizzService {
 
     @Autowired
@@ -23,8 +25,8 @@ public class QuizzService {
     }
 
     public void deleteQuizz(Long quizzId){
-        this.quizzRepository.findById(quizzId);
-        this.quizzRepository.deleteQuizzById(quizzId);
+        Quizz quizz = this.quizzRepository.findById(quizzId).orElse(null);
+        this.quizzRepository.delete(quizz);
     }
 
     public Quizz createQuizz(Quizz quizz){
@@ -37,7 +39,6 @@ public class QuizzService {
         Quizz quizzToUpdate = getQuizz(quizzToUpdateId);
         quizzToUpdate.setActive(quizz.isActive());
         quizzToUpdate.setSkill(quizz.getSkill());
-        quizzToUpdate.setUser(quizz.getUser());
 
         return this.quizzRepository.save(quizzToUpdate);
     }

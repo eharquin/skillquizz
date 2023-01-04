@@ -1,18 +1,24 @@
 package fr.utc.skillquizz.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="questions")
+@Table(name = "questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "quizz_id")
+    private Quizz quizz;
     private int order;
     private String text;
     private boolean active;
     @OneToOne
     private Version version;
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers;
     @OneToOne
     @JoinColumn(name = "right_answer", referencedColumnName = "id")
     private Answer goodAnswer;
@@ -55,6 +61,14 @@ public class Question {
 
     public void setVersion(Version version) {
         this.version = version;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     public Answer getGoodAnswer() {

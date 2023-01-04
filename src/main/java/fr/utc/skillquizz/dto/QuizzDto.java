@@ -1,16 +1,17 @@
 package fr.utc.skillquizz.dto;
 
+import fr.utc.skillquizz.models.Question;
 import fr.utc.skillquizz.models.Skill;
 import fr.utc.skillquizz.models.User;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class QuizzDto implements Serializable {
     private int id;
-    private long userId;
-    private long skillId;
+    private String skill;
     private boolean active;
-
+    private List<Question> questions;
 
     public int getId() {
         return id;
@@ -28,19 +29,19 @@ public class QuizzDto implements Serializable {
         this.active = active;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getSkill() {
+        return skill;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setSkill(String skillId) {
+        this.skill = skillId;
     }
 
-    public long getSkillId() {
-        return skillId;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setSkillId(long skillId) {
-        this.skillId = skillId;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

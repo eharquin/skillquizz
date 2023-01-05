@@ -5,9 +5,11 @@ import fr.utc.skillquizz.models.Course;
 import fr.utc.skillquizz.repositories.AnswerRepository;
 import fr.utc.skillquizz.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CourseService {
 
     @Autowired
@@ -23,6 +25,10 @@ public class CourseService {
     }
     public List<Course> getCourses() {
         return courseRepository.findAll();
+    }
+
+    public List<Course> getCoursesFor(long userId) {
+        return courseRepository.findByUserId(userId);
     }
 
     public Course getCourse(long id) {

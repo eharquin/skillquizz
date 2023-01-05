@@ -1,5 +1,6 @@
 package fr.utc.skillquizz.controllers;
 
+import fr.utc.skillquizz.authentication.AuthenticationFacade;
 import fr.utc.skillquizz.dto.CourseDto;
 import fr.utc.skillquizz.models.Course;
 import fr.utc.skillquizz.services.CourseService;
@@ -8,16 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RestController
 public class CourseController extends BaseController{
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private AuthenticationFacade auth;
+
     @GetMapping(path = "/course", produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<CourseDto> index(){
-        List<Course> coursesList = courseService.getCourses();
+    public List<CourseDto> index() {
+        List<Course> coursesList = courseService.getCoursesFor(auth.getUser().getId());
         List<CourseDto> coursesDtoList = mapList(coursesList, CourseDto.class);
         return coursesDtoList;
     }
@@ -33,18 +39,8 @@ public class CourseController extends BaseController{
     @PostMapping("/course")
     public void store(@RequestBody CourseDto courseDto){
         Course course = convertToEntity(courseDto);
+        course.setUser(auth.getUser());
         courseService.createCourse(course);
-    }
-
-    @PatchMapping("/course/{courseToModifyId}")
-    public void update(@PathVariable long courseToModifyId, @RequestBody CourseDto courseDto){
-        Course course = convertToEntity(courseDto);
-        courseService.updateCourse(course, courseToModifyId);
-    }
-
-    @PostMapping("/course/{courseToModifyId}/answer/{answerToAdd}")
-    public void addAnswerToCourse(@PathVariable long courseToModifyId, @PathVariable long answerToAdd){
-        courseService.addAnswerToCourse(courseToModifyId, answerToAdd);
     }
 
     @DeleteMapping("/course/{courseId}")

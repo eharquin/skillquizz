@@ -34,6 +34,7 @@ public class UserService {
         old.setName(user.getName());
         old.setPhoneNumber(user.getPhoneNumber());
         old.setType(user.getType());
+        old.setActive(user.isActive());
         userRepository.save(old);
     }
 

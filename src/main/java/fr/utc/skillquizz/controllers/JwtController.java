@@ -33,13 +33,13 @@ public class JwtController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+            final String jwtToken = tokenManager.generateJwtToken(userDetails);
+            return ResponseEntity.ok(new JwtResponseModel(jwtToken));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-        final String jwtToken = tokenManager.generateJwtToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseModel(jwtToken));
     }
 }

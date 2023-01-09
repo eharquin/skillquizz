@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String company;
     private String phoneNumber;
-
+    private boolean active;
     private String password;
 
     public Long getId() {
@@ -74,5 +74,13 @@ public class User {
     public void setPassword(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

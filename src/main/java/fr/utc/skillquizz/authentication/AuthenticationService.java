@@ -2,13 +2,17 @@ package fr.utc.skillquizz.authentication;
 
 import fr.utc.skillquizz.models.User;
 import fr.utc.skillquizz.repositories.UserRepository;
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,7 +28,9 @@ public class AuthenticationService implements UserDetailsService {
         if (u == null) {
             throw new UsernameNotFoundException("Utilisateur non trouvé : " + email);
         }
-
+        if (!u.isActive()){
+            throw new DisabledException("L'utilisateur est désactivé");
+        }
         return createUser(u);
     }
 

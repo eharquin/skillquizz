@@ -1,10 +1,13 @@
 package fr.utc.skillquizz.controllers;
 
+import fr.utc.skillquizz.dto.CourseDto;
 import fr.utc.skillquizz.dto.QuizzDto;
+import fr.utc.skillquizz.models.Course;
 import fr.utc.skillquizz.services.CourseService;
 import fr.utc.skillquizz.services.QuizzService;
 import fr.utc.skillquizz.models.Quizz;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +25,13 @@ public class QuizzController extends BaseController {
         List<Quizz> quizzes = quizzService.getQuizzesList();
         List<QuizzDto> quizzesDto = super.mapList(quizzes, QuizzDto.class);
         return quizzesDto;
+    }
+
+    @GetMapping(path = "/admin/quizz/{quizId}/ranking", produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<CourseDto> getRankingByQuiz(@PathVariable long quizId) {
+        List<Course> coursesList = courseService.getRankingByQuizId(quizId);
+        List<CourseDto> coursesDtoList = mapList(coursesList, CourseDto.class);
+        return coursesDtoList;
     }
 
     @GetMapping("/quizz/{id}")

@@ -17,5 +17,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     Course findFirstByQuizzIdOrderByScoreAsc(Long quizzId);
     @Query(value = "SELECT avg(c.score) FROM Course c join Question q where q.id = :quizzId")
     public Double avg(long quizzId);
+    List<Course> findAllByQuizzIdOrderByScoreDesc(Long quizzId);
 
 }

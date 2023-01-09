@@ -72,4 +72,8 @@ public class CourseService {
         return avg.intValue();
     }
 
+    public List<Course> getRankingByQuizId(long quizId){
+        return courseRepository.findAllByQuizzIdOrderByScoreDesc(quizId);
+    }
+
 }

@@ -31,7 +31,6 @@ public class CourseController extends BaseController{
         return coursesDtoList;
     }
 
-
     @GetMapping(path = "/course/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
     public CourseDto show(@PathVariable long id){
         Course course =  courseService.getCourse(id);

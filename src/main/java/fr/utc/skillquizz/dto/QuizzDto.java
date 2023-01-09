@@ -9,6 +9,7 @@ import java.util.List;
 
 public class QuizzDto implements Serializable {
     private int id;
+    private String name;
     private String skill;
     private boolean active;
     private List<Question> questions;
@@ -43,5 +44,13 @@ public class QuizzDto implements Serializable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

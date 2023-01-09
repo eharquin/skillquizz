@@ -1,6 +1,5 @@
 package fr.utc.skillquizz.services;
 
-import fr.utc.skillquizz.dto.QuizzDto;
 import fr.utc.skillquizz.models.Quizz;
 import fr.utc.skillquizz.repositories.QuizzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,7 @@ public class QuizzService {
     public Quizz updateQuizz(long quizzToUpdateId, Quizz quizz){
         System.out.println("Answer name : " + quizz.getId());
         Quizz quizzToUpdate = getQuizz(quizzToUpdateId);
+        quizzToUpdate.setName(quizz.getName());
         quizzToUpdate.setActive(quizz.isActive());
         quizzToUpdate.setSkill(quizz.getSkill());
 

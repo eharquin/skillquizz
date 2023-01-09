@@ -9,7 +9,9 @@ public class Quizz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String skill;
+    private String name;
+    @ManyToOne
+    private Skill skill;
     private boolean active;
     @OneToMany(mappedBy = "quizz")
     private List<Question> questions;
@@ -22,11 +24,11 @@ public class Quizz {
         this.id = id;
     }
 
-    public String getSkill() {
+    public Skill getSkill() {
         return skill;
     }
 
-    public void setSkill(String skill) {
+    public void setSkill(Skill skill) {
         this.skill = skill;
     }
 
@@ -40,5 +42,17 @@ public class Quizz {
 
     public List<Question> getQuestions() {
         return questions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

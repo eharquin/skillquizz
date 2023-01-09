@@ -1,12 +1,15 @@
 package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.Skill;
+import fr.utc.skillquizz.models.User;
 import fr.utc.skillquizz.repositories.SkillRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -29,4 +32,19 @@ public class SkillServices {
         System.out.println("Skill : " + skill.getSubject());
         return this.skillRepository.save(skill);
     }
+
+    public List<Skill> getSkills() {
+        return skillRepository.findAll();
+    }
+
+    public Skill getSkill(long id) {
+        return skillRepository.findById(id).orElseThrow();
+    }
+
+    public void updateSkill(long skillID, Skill skill) {
+        Skill old = getSkill(skillID);
+        old.setSubject(skill.getSubject());
+        skillRepository.save(old);
+    }
+
 }

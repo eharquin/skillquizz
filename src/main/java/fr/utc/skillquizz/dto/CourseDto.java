@@ -76,4 +76,5 @@ public class CourseDto implements Serializable {
     public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
+
 }

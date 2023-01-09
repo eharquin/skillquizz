@@ -12,6 +12,9 @@ public class QuizzDto implements Serializable {
     private String skill;
     private boolean active;
     private List<Question> questions;
+    private int worstScore;
+    private int bestScore;
+    private int avgScore;
 
     public int getId() {
         return id;
@@ -43,5 +46,28 @@ public class QuizzDto implements Serializable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+    public int getWorstScore() {
+        return worstScore;
+    }
+
+    public void setWorstScore(int worstScore) {
+        this.worstScore = worstScore;
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
+
+    public void setBestScore(int bestScore) {
+        this.bestScore = bestScore;
+    }
+
+    public int getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(int avgScore) {
+        this.avgScore = avgScore;
     }
 }

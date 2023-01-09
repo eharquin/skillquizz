@@ -1,6 +1,7 @@
 package fr.utc.skillquizz.controllers;
 
 import fr.utc.skillquizz.dto.QuizzDto;
+import fr.utc.skillquizz.services.CourseService;
 import fr.utc.skillquizz.services.QuizzService;
 import fr.utc.skillquizz.models.Quizz;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class QuizzController extends BaseController {
 
     @Autowired
     private QuizzService quizzService;
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/quizz")
     public List<QuizzDto> index() {
@@ -25,6 +28,9 @@ public class QuizzController extends BaseController {
     public QuizzDto show(@PathVariable Long id) {
         Quizz quizz = quizzService.getQuizz(id);
         QuizzDto dto = convertToDto(quizz);
+        dto.setAvgScore(courseService.getAvgScore(id));
+        dto.setBestScore(courseService.getBestScore(id));
+        dto.setWorstScore(courseService.getWorstScore(id));
         return dto;
     }
 

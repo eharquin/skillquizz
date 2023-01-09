@@ -31,6 +31,9 @@ public class QuestionService {
     }
 
     public Question createQuestion(Question question){
+        if(question.getGoodAnswer()==null){
+            question.setActive(false);
+        }
         System.out.println("Question name : " + question.getId());
         return this.questionRepository.save(question);
     }

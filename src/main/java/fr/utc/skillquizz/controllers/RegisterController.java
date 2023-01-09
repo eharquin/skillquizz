@@ -16,7 +16,7 @@ public class RegisterController extends BaseController{
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path = "/register", produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/admin/register", produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDto){
         User user = new User();
         user.setEmail(userDto.getEmail());

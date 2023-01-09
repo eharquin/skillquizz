@@ -41,9 +41,9 @@ public class CourseController extends BaseController{
 
     @PostMapping("/course")
     public void store(@RequestBody CourseDto courseDto){
-        Timestamp endTime = new Timestamp(System.currentTimeMillis());
         Course course = convertToEntity(courseDto);
         if(courseDto.getStartDate() != null) {
+            Timestamp endTime = new Timestamp(System.currentTimeMillis());
             int duration = (int) (endTime.getTime() - courseDto.getStartDate().getTime());
             course.setDuration(duration);
         }

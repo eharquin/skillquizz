@@ -6,6 +6,7 @@ import fr.utc.skillquizz.models.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class CourseDto implements Serializable {
     private int score;
     private Quizz quizz;
     private int userId;
-
+    private Timestamp startDate;
     private List<Answer> answers;
 
     public Long getId() {
@@ -66,5 +67,13 @@ public class CourseDto implements Serializable {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public Timestamp getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,12 @@ public class CourseController extends BaseController{
 
     @PostMapping("/course")
     public void store(@RequestBody CourseDto courseDto){
+        Timestamp endTime = new Timestamp(System.currentTimeMillis());
         Course course = convertToEntity(courseDto);
+        if(courseDto.getStartDate() != null) {
+            int duration = (int) (endTime.getTime() - courseDto.getStartDate().getTime());
+            course.setDuration(duration);
+        }
         course.setUser(auth.getUser());
         courseService.createCourse(course);
     }

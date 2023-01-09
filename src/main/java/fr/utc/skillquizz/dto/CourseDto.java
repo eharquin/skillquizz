@@ -7,21 +7,24 @@ import fr.utc.skillquizz.models.User;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CourseDto implements Serializable {
 
-    private int id;
+    private Long id;
     private int duration;
     private int score;
-    private int quizzId;
+    private Quizz quizz;
     private int userId;
 
-    public int getId() {
+    private List<Answer> answers;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,12 +44,12 @@ public class CourseDto implements Serializable {
         this.score = score;
     }
 
-    public int getQuizzId() {
-        return quizzId;
+    public Quizz getQuizz() {
+        return quizz;
     }
 
-    public void setQuizzId(int quizzId) {
-        this.quizzId = quizzId;
+    public void setQuizz(Quizz quizz) {
+        this.quizz = quizz;
     }
 
     public int getUserId() {
@@ -55,5 +58,13 @@ public class CourseDto implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

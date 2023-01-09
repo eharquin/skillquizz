@@ -5,27 +5,27 @@ import fr.utc.skillquizz.models.User;
 import java.io.Serializable;
 
 public class UserDto implements Serializable {
-    private int id;
-    private int type;
+    private Long id;
+    private String type;
     private String email;
     private String name;
     private String company;
     private String phoneNumber;
     private String password;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

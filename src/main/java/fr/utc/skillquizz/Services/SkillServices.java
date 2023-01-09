@@ -1,4 +1,4 @@
-package fr.utc.skillquizz.Services;
+package fr.utc.skillquizz.services;
 
 import fr.utc.skillquizz.models.Skill;
 import fr.utc.skillquizz.repositories.SkillRepository;

@@ -2,7 +2,9 @@ package fr.utc.skillquizz.controllers;
 
 import fr.utc.skillquizz.authentication.AuthenticationFacade;
 import fr.utc.skillquizz.dto.CourseDto;
+import fr.utc.skillquizz.models.Answer;
 import fr.utc.skillquizz.models.Course;
+import fr.utc.skillquizz.models.Question;
 import fr.utc.skillquizz.services.CourseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,12 @@ public class CourseController extends BaseController{
             course.setDuration(duration);
         }
         course.setUser(auth.getUser());
+        course.setScore(0);
+        for(Answer answer : course.getAnswers()){
+            if (answer.getId()==answer.getQuestion().getGoodAnswer().getId()){
+                course.setScore(course.getScore() + 1);
+            }
+        }
         courseService.createCourse(course);
     }
 

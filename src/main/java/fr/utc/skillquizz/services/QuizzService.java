@@ -52,4 +52,16 @@ public class QuizzService {
     public Page<Quizz> getQuizzesList(String skill, Pageable pageable) {
         return this.quizzRepository.searchBySkillContaining(skill, pageable);
     }
+
+    public Integer getAvgScore(Long quizzId){
+        return this.quizzRepository.getAvgScore(quizzId);
+    }
+
+    public Integer getBestScore(Long quizzId){
+        return this.quizzRepository.getBestScore(quizzId);
+    }
+
+    public Integer getWorstScore(Long quizzId){
+        return this.quizzRepository.getWorstScore(quizzId);
+    }
 }

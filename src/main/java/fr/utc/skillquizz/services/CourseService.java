@@ -57,21 +57,6 @@ public class CourseService {
         courseRepository.save(course);
     }
 
-    public int getBestScore(long quizzId){
-        Course course = courseRepository.findFirstByQuizzIdOrderByScoreDesc(quizzId);
-        return course.getScore();
-    }
-
-    public int getWorstScore(long quizzId){
-        Course course = courseRepository.findFirstByQuizzIdOrderByScoreAsc(quizzId);
-        return course.getScore();
-    }
-
-    public int getAvgScore(long quizzId){
-        Double avg = courseRepository.avg(quizzId);
-        return avg.intValue();
-    }
-
     public List<Course> getRankingByQuizId(long quizId){
         return courseRepository.findAllByQuizzIdOrderByScoreDesc(quizId);
     }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="quizzes")
+@Table(name = "quizzes")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Quizz {
     @Id
@@ -18,6 +18,12 @@ public class Quizz {
     private List<Question> questions;
     @ManyToOne
     private Skill skill;
+
+    private Integer worstScore;
+
+    private Integer bestScore;
+
+    private Integer avgScore;
 
     public Long getId() {
         return id;
@@ -45,5 +51,29 @@ public class Quizz {
 
     public List<Question> getQuestions() {
         return questions;
+    }
+
+    public Integer getWorstScore() {
+        return worstScore;
+    }
+
+    public void setWorstScore(Integer worstScore) {
+        this.worstScore = worstScore;
+    }
+
+    public Integer getBestScore() {
+        return bestScore;
+    }
+
+    public void setBestScore(Integer bestScore) {
+        this.bestScore = bestScore;
+    }
+
+    public Integer getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(Integer avgScore) {
+        this.avgScore = avgScore;
     }
 }

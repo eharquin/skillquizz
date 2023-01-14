@@ -23,14 +23,14 @@ public class QuizzController extends BaseController {
     private CourseService courseService;
 
     @GetMapping("/quizz")
-    public Page<Quizz> index(@RequestParam(required = false) String searchQuery, @RequestParam(required = false, defaultValue = "0") Integer page) {
+    public Page<QuizzDto> index(@RequestParam(required = false) String searchQuery, @RequestParam(required = false, defaultValue = "0") Integer page) {
         Page<Quizz> quizzes;
         if(searchQuery == null || searchQuery.isEmpty()) {
             quizzes = quizzService.getQuizzesList(PageRequest.of(page, 5));
         } else {
             quizzes = quizzService.getQuizzesList(searchQuery, PageRequest.of(page, 5));
         }
-        return quizzes;
+        return quizzes.map(this::convertToDto);
     }
 
     @GetMapping(path = "/admin/quizz/{quizId}/ranking", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -43,11 +43,7 @@ public class QuizzController extends BaseController {
     @GetMapping("/quizz/{id}")
     public QuizzDto show(@PathVariable Long id) {
         Quizz quizz = quizzService.getQuizz(id);
-        QuizzDto dto = convertToDto(quizz);
-        dto.setAvgScore(courseService.getAvgScore(id));
-        dto.setBestScore(courseService.getBestScore(id));
-        dto.setWorstScore(courseService.getWorstScore(id));
-        return dto;
+        return convertToDto(quizz);
     }
 
     @PostMapping("/admin/quizz")
@@ -68,6 +64,9 @@ public class QuizzController extends BaseController {
 
     private QuizzDto convertToDto(Quizz quizz) {
         QuizzDto quizzDto = super.getModelMapper().map(quizz, QuizzDto.class);
+        quizzDto.setAvgScore(quizzService.getAvgScore(quizz.getId()));
+        quizzDto.setBestScore(quizzService.getBestScore(quizz.getId()));
+        quizzDto.setWorstScore(quizzService.getWorstScore(quizz.getId()));
         return quizzDto;
     }
 

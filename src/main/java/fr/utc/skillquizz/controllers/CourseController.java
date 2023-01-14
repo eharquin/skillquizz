@@ -6,6 +6,7 @@ import fr.utc.skillquizz.models.Answer;
 import fr.utc.skillquizz.models.Course;
 import fr.utc.skillquizz.models.Question;
 import fr.utc.skillquizz.services.CourseService;
+import fr.utc.skillquizz.services.QuizzService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,47 +18,47 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-public class CourseController extends BaseController{
+public class CourseController extends BaseController {
     @Autowired
     private CourseService courseService;
 
     @Autowired
     private AuthenticationFacade auth;
 
-    @GetMapping(path = "/course", produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/course", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CourseDto> index() {
         List<Course> coursesList = courseService.getCoursesFor(auth.getUser().getId());
         List<CourseDto> coursesDtoList = mapList(coursesList, CourseDto.class);
         return coursesDtoList;
     }
 
-    @GetMapping(path = "/course/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-    public CourseDto show(@PathVariable long id){
-        Course course =  courseService.getCourse(id);
+    @GetMapping(path = "/course/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CourseDto show(@PathVariable long id) {
+        Course course = courseService.getCourse(id);
         CourseDto courseDto = convertToDto(course);
         return courseDto;
     }
 
     @PostMapping("/course")
-    public void store(@RequestBody CourseDto courseDto){
+    public void store(@RequestBody CourseDto courseDto) {
         Course course = convertToEntity(courseDto);
-        if(courseDto.getStartDate() != null) {
+        if (courseDto.getStartDate() != null) {
             Timestamp endTime = new Timestamp(System.currentTimeMillis());
             int duration = (int) (endTime.getTime() - courseDto.getStartDate().getTime());
             course.setDuration(duration);
         }
         course.setUser(auth.getUser());
         course.setScore(0);
-        for(Answer answer : course.getAnswers()){
-            if (answer.getId()==answer.getQuestion().getGoodAnswer().getId()){
-                course.setScore(course.getScore() + 1);
-            }
-        }
+//        for (Answer answer : course.getAnswers()) {
+//            if (answer.getId() == answer.getQuestion().getGoodAnswer().getId()) {
+//                course.setScore(course.getScore() + 1);
+//            }
+//        }
         courseService.createCourse(course);
     }
 
     @DeleteMapping("/course/{courseId}")
-    public void destroy(@PathVariable long courseId){
+    public void destroy(@PathVariable long courseId) {
         courseService.deleteCourse(courseId);
     }
 
@@ -66,7 +67,7 @@ public class CourseController extends BaseController{
         return courseDto;
     }
 
-    private Course convertToEntity(CourseDto courseDto)  {
+    private Course convertToEntity(CourseDto courseDto) {
         Course course = getModelMapper().map(courseDto, Course.class);
         return course;
     }

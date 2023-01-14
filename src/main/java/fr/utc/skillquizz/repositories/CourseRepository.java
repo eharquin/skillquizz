@@ -13,10 +13,6 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByUserId(Long userId);
-    Course findFirstByQuizzIdOrderByScoreDesc(Long quizzId);
-    Course findFirstByQuizzIdOrderByScoreAsc(Long quizzId);
-    @Query(value = "SELECT avg(c.score) FROM Course c left join c.quizz q where q.id = :quizzId")
-    public Double avg(long quizzId);
     List<Course> findAllByQuizzIdOrderByScoreDesc(Long quizzId);
 
 }

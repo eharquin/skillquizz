@@ -8,6 +8,8 @@ import fr.utc.skillquizz.services.QuizzService;
 import fr.utc.skillquizz.models.Quizz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,10 +23,14 @@ public class QuizzController extends BaseController {
     private CourseService courseService;
 
     @GetMapping("/quizz")
-    public List<QuizzDto> index() {
-        List<Quizz> quizzes = quizzService.getQuizzesList();
-        List<QuizzDto> quizzesDto = super.mapList(quizzes, QuizzDto.class);
-        return quizzesDto;
+    public Page<Quizz> index(@RequestParam(required = false) String searchQuery, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        Page<Quizz> quizzes;
+        if(searchQuery == null || searchQuery.isEmpty()) {
+            quizzes = quizzService.getQuizzesList(PageRequest.of(page, 5));
+        } else {
+            quizzes = quizzService.getQuizzesList(searchQuery, PageRequest.of(page, 5));
+        }
+        return quizzes;
     }
 
     @GetMapping(path = "/admin/quizz/{quizId}/ranking", produces= MediaType.APPLICATION_JSON_VALUE)

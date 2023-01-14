@@ -9,7 +9,7 @@ import java.util.List;
 
 public class QuizzDto implements Serializable {
     private int id;
-    private String skill;
+    private Skill skill;
     private boolean active;
     private List<Question> questions;
     private int worstScore;
@@ -32,12 +32,12 @@ public class QuizzDto implements Serializable {
         this.active = active;
     }
 
-    public String getSkill() {
+    public Skill getSkill() {
         return skill;
     }
 
-    public void setSkill(String skillId) {
-        this.skill = skillId;
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 
     public List<Question> getQuestions() {

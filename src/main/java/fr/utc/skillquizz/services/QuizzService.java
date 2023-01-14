@@ -4,6 +4,8 @@ import fr.utc.skillquizz.dto.QuizzDto;
 import fr.utc.skillquizz.models.Quizz;
 import fr.utc.skillquizz.repositories.QuizzRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +45,11 @@ public class QuizzService {
         return this.quizzRepository.save(quizzToUpdate);
     }
 
-    public List<Quizz> getQuizzesList() {
-        return this.quizzRepository.findAll();
+    public Page<Quizz> getQuizzesList(Pageable pageable) {
+        return this.quizzRepository.findAll(pageable);
+    }
+
+    public Page<Quizz> getQuizzesList(String skill, Pageable pageable) {
+        return this.quizzRepository.searchBySkillContaining(skill, pageable);
     }
 }

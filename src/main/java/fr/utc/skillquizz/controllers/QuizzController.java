@@ -23,7 +23,7 @@ public class QuizzController extends BaseController {
     private CourseService courseService;
 
     @GetMapping("/quizz")
-    public Page<Quizz> index(@RequestParam(required = false) String searchQuery, @RequestParam(required = false, defaultValue = "1") Integer page) {
+    public Page<Quizz> index(@RequestParam(required = false) String searchQuery, @RequestParam(required = false, defaultValue = "0") Integer page) {
         Page<Quizz> quizzes;
         if(searchQuery == null || searchQuery.isEmpty()) {
             quizzes = quizzService.getQuizzesList(PageRequest.of(page, 5));

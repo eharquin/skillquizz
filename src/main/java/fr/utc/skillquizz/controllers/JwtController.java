@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @CrossOrigin
 public class JwtController {
@@ -28,13 +31,15 @@ public class JwtController {
     private TokenManager tokenManager;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponseModel> createToken(@RequestBody JwtRequestModel request) throws Exception {
+    public ResponseEntity<JwtResponseModel> createToken(@RequestBody JwtRequestModel request, HttpServletResponse response) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
             final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
             final String jwtToken = tokenManager.generateJwtToken(userDetails);
+            Cookie cookie = new Cookie("jwt", jwtToken);
+            response.addCookie(cookie);
             return ResponseEntity.ok(new JwtResponseModel(jwtToken));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);

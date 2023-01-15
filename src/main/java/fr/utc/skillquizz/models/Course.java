@@ -17,12 +17,10 @@ public class Course {
     private Long id;
     private int duration;
     private int score;
-
     @ManyToOne
     private Quizz quizz;
     @ManyToOne
     private User user;
-
     @ManyToMany
     @JoinTable(
             name = "answers_courses",

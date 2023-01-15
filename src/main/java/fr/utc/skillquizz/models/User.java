@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +22,8 @@ public class User {
     private String phoneNumber;
     private boolean active;
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<Course> courses;
 
     public Long getId() {
         return id;
@@ -87,5 +90,13 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

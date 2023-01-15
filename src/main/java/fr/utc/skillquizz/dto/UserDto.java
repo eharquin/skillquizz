@@ -1,8 +1,10 @@
 package fr.utc.skillquizz.dto;
 
+import fr.utc.skillquizz.models.Course;
 import fr.utc.skillquizz.models.User;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserDto implements Serializable {
     private Long id;
@@ -13,6 +15,7 @@ public class UserDto implements Serializable {
     private String phoneNumber;
     private String password;
     private boolean active;
+    private List<Course> courses;
 
     public Long getId() {
         return id;
@@ -76,5 +79,13 @@ public class UserDto implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

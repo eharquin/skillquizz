@@ -75,8 +75,10 @@ public class User {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
+        if (password != null) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            this.password = passwordEncoder.encode(password);
+        }
     }
 
     public boolean isActive() {
